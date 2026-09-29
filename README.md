@@ -1,42 +1,5 @@
-<p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/jundizhou/easy-stock@main/desktop/assets/easy-stock.png" width="112" height="112" alt="easy-stock Logo" />
-</p>
 
-<h1 align="center">easy-stock：A股 AI 智能投研工作台</h1>
 
-<p align="center"><strong>面向个人投资者的 A股行情分析、股票分析与 AI投研桌面应用</strong></p>
-
-<p align="center"><sub><a href="./README_EN.md">English</a> | 简体中文</sub></p>
-
-<p align="center">
-  让 AI 看懂市场，让每一次判断都有证据。<br />
-  把盘中观察、盘后复盘和长期认知，沉淀为一套持续进化的研究系统。
-</p>
-
-<p align="center">
-  <a href="https://github.com/jundizhou/easy-stock/releases/latest"><strong>下载最新版</strong></a> ·
-  <a href="https://qm.qq.com/q/lizlauc32U"><strong>加入 QQ 群</strong></a> ·
-  <a href="#核心产品能力">查看核心能力</a> ·
-  <a href="https://github.com/jundizhou/easy-stock/issues/new/choose">反馈问题</a> ·
-  <a href="./ROADMAP.md">产品路线图</a>
-</p>
-
-<p align="center">
-  <img alt="Go" src="https://img.shields.io/badge/Backend-Go-00ADD8?logo=go&logoColor=white" />
-  <img alt="React" src="https://img.shields.io/badge/Frontend-React%20%2B%20TypeScript-3178C6?logo=react&logoColor=white" />
-  <img alt="Electron" src="https://img.shields.io/badge/Desktop-Electron-47848F?logo=electron&logoColor=white" />
-  <img alt="Hermes" src="https://img.shields.io/badge/AI-Hermes-6D5BD0" />
-  <img alt="Local First" src="https://img.shields.io/badge/Data-Local%20First-159A80" />
-  <img alt="License" src="https://img.shields.io/badge/License-Non--Commercial-EA580C" />
-  <a href="https://github.com/jundizhou/easy-stock/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/jundizhou/easy-stock?label=Release" /></a>
-  <a href="https://github.com/jundizhou/easy-stock/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jundizhou/easy-stock?style=flat" /></a>
-</p>
-
-<h3 align="center">easy-stock QQ 交流群</h3>
-
-<p align="center">
-  <a href="https://qm.qq.com/q/lizlauc32U"><strong>点击加入群聊：422158208</strong></a>
-</p>
 
 <p align="center">
   <a href="#为什么要做-easy-stock">为什么</a> ·
