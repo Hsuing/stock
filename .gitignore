@@ -9,6 +9,7 @@ coverage/
 # Local runtime state, databases, browser sessions, and user settings.
 .runtime/
 *.db
+*.exe
 *.db-shm
 *.db-wal
 *.sqlite

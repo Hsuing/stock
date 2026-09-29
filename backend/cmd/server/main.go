@@ -48,6 +48,9 @@ func main() {
 	if marketEmotionDBPath == "" {
 		marketEmotionDBPath = dataPath(dataDir, "market-emotion.db")
 	}
+	if etfDBPath := os.Getenv("A_STOCK_ETF_DB"); etfDBPath == "" {
+		os.Setenv("A_STOCK_ETF_DB", dataPath(dataDir, "etf-shares.db"))
+	}
 	if themeRadarDBPath == "" {
 		themeRadarDBPath = dataPath(dataDir, "theme-radar.db")
 	}
@@ -92,6 +95,7 @@ func main() {
 		StockResearchDBPath:  stockResearchDBPath,
 		RemoteDailyReviewURL: os.Getenv("A_STOCK_DAILY_REVIEW_BASE_URL"),
 		MarketEmotionDBPath:  marketEmotionDBPath,
+		ETFDBPath:            os.Getenv("A_STOCK_ETF_DB"),
 		ThemeRadarDBPath:     themeRadarDBPath,
 		DuanxianxiaBaseURL:   os.Getenv("A_STOCK_DUANXIANXIA_BASE_URL"),
 		WeChatAPIURL:         os.Getenv("A_STOCK_WECHAT_API_URL"),

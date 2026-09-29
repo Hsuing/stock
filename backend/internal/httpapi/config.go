@@ -10,6 +10,7 @@ import (
 	"easy-stock/backend/internal/foundation"
 	"easy-stock/backend/internal/hermes"
 	"easy-stock/backend/internal/marketemotion"
+	"easy-stock/backend/internal/etf"
 	"easy-stock/backend/internal/methodology"
 	"easy-stock/backend/internal/portfolioinspection"
 	"easy-stock/backend/internal/review"
@@ -125,6 +126,7 @@ type Config struct {
 	StockResearchDBPath  string
 	StockResearchStore   *stockanalysis.ResearchStore
 	MarketEmotionDBPath  string
+	ETFDBPath            string
 	ThemeRadarDBPath     string
 	DuanxianxiaBaseURL   string
 	WeChatAPIURL         string
@@ -132,6 +134,7 @@ type Config struct {
 	ReviewStore          *review.Store
 	PortfolioStore       *portfolioinspection.Store
 	MarketEmotionStore   *marketemotion.Store
+	ETFStore             *etf.Store
 	ReviewImporter       ReviewImporter
 	SettingsPath         string
 	SettingsStore        *appsettings.Store

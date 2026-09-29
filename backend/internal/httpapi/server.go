@@ -17,6 +17,7 @@ import (
 	"easy-stock/backend/internal/foundation"
 	"easy-stock/backend/internal/hermes"
 	"easy-stock/backend/internal/marketemotion"
+	"easy-stock/backend/internal/etf"
 	"easy-stock/backend/internal/methodology"
 	"easy-stock/backend/internal/portfolioinspection"
 	"easy-stock/backend/internal/providers/cls"
@@ -77,6 +78,7 @@ type Server struct {
 	usageGateway          hermes.Gateway
 	masteryLibrary        *methodology.Library
 	marketEmotionStore    *marketemotion.Store
+	etfStore              *etf.Store
 	themeRadarStore       *duanxianxia.Store
 	themeProgress         *themeProgressCache
 	startupError          error
@@ -194,6 +196,17 @@ func NewServer(config any) *Server {
 			cfg.MarketEmotionStore, _ = marketemotion.OpenStore("")
 		} else {
 			cfg.MarketEmotionStore, _ = marketemotion.OpenStore("")
+		}
+	}
+	if cfg.ETFStore == nil {
+		store, err := etf.OpenStore(cfg.ETFDBPath)
+		if err == nil {
+			cfg.ETFStore = store
+		} else if cfg.StrictPersistence {
+			startupErrors = append(startupErrors, fmt.Errorf("open etf database: %w", err))
+			cfg.ETFStore, _ = etf.OpenStore(":memory:")
+		} else {
+			cfg.ETFStore, _ = etf.OpenStore(":memory:")
 		}
 	}
 	if cfg.PortfolioStore == nil {
@@ -317,6 +330,7 @@ func NewServer(config any) *Server {
 		usageGateway:          usageGateway,
 		masteryLibrary:        cfg.MasteryLibrary,
 		marketEmotionStore:    cfg.MarketEmotionStore,
+		etfStore:              cfg.ETFStore,
 		startupError:          errors.Join(startupErrors...),
 		logger:                cfg.Logger,
 		tokenUsage:            tokenUsage,
@@ -389,6 +403,9 @@ func (s *Server) Close() error {
 	}
 	if s.reviewStore != nil {
 		closeErrors = append(closeErrors, s.reviewStore.Close())
+	}
+	if s.etfStore != nil {
+		closeErrors = append(closeErrors, s.etfStore.Close())
 	}
 	if s.marketEmotionStore != nil {
 		closeErrors = append(closeErrors, s.marketEmotionStore.Close())
@@ -504,6 +521,9 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /api/v1/market/futures-position", s.marketFuturesPositionHandler)
 	s.mux.HandleFunc("GET /api/v1/market/futures-members", s.marketFuturesMembersHandler)
 	s.mux.HandleFunc("GET /api/v1/market/futures-consensus", s.marketFuturesConsensusHandler)
+	s.mux.HandleFunc("GET /api/v1/etf/shares", s.handleETFShareRanking)
+	s.mux.HandleFunc("POST /api/v1/etf/track", s.handleTrackETF)
+	s.mux.HandleFunc("GET /api/v1/etf/shares/{code}/history", s.handleETFShareHistory)
 	s.mux.HandleFunc("GET /api/v1/research/announcements", s.marketAnnouncementsHandler)
 	s.mux.HandleFunc("GET /api/v1/research/institution-reports", s.marketInstitutionReportsHandler)
 	s.mux.HandleFunc("GET /api/v1/research/industries", s.marketIndustryResearchHandler)
@@ -875,3 +895,4 @@ func firstNonEmpty(values ...string) string {
 	}
 	return ""
 }
+
